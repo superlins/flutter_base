@@ -1,0 +1,2 @@
+// 此处是 Domain 层 Repository 接口的具体实现
+// 负责调用 Service 并将 Model 转换为 Entity

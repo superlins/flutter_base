@@ -1,0 +1,2 @@
+// 此处存放与后端 API 对应的 DTO 模型 (Data Transfer Objects)
+// 建议配合 freezed 使用
