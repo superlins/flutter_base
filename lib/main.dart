@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'l10n/app_localizations.dart';
-import 'core/persistence.dart';
-import 'core/theme.dart';
-import 'core/router.dart';
+import 'core/storage/providers.dart';
+import 'core/theme/theme.dart';
+import 'core/router/router.dart';
 
 void main() async {
   // 确保 Flutter 绑定初始化
