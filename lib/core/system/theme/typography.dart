@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class GFTypography {
-  GFTypography._();
+class AppTypography {
+  AppTypography._();
 
   static const String fontFamily = 'Inter';
 

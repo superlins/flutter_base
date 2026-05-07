@@ -39,4 +39,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error_unknown => 'An unknown error occurred.';
+
+  @override
+  String get login_welcome => 'Welcome Back';
+
+  @override
+  String get login_subtitle => 'Please enter your Supabase credentials to log in';
+
+  @override
+  String get login_email => 'Email Address';
+
+  @override
+  String get login_password => 'Password';
+
+  @override
+  String get login_submit => 'Secure Login';
+
+  @override
+  String get login_error_email_empty => 'Please enter your email';
+
+  @override
+  String get login_error_email_invalid => 'Please enter a valid email';
+
+  @override
+  String get login_error_password_empty => 'Please enter your password';
+
+  @override
+  String get login_error_password_length => 'Password must be at least 6 characters';
+
+  @override
+  String login_failed(String reason) {
+    return 'Login failed: $reason';
+  }
 }

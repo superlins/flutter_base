@@ -39,4 +39,36 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get error_unknown => '发生未知错误。';
+
+  @override
+  String get login_welcome => '欢迎回来';
+
+  @override
+  String get login_subtitle => '请输入您的 Supabase 账号密码登录';
+
+  @override
+  String get login_email => '电子邮箱';
+
+  @override
+  String get login_password => '密码';
+
+  @override
+  String get login_submit => '安全登录';
+
+  @override
+  String get login_error_email_empty => '请输入邮箱';
+
+  @override
+  String get login_error_email_invalid => '请输入合法的邮箱';
+
+  @override
+  String get login_error_password_empty => '请输入密码';
+
+  @override
+  String get login_error_password_length => '密码长度不能少于 6 位';
+
+  @override
+  String login_failed(String reason) {
+    return '登录失败: $reason';
+  }
 }

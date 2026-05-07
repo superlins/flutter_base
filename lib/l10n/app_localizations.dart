@@ -154,6 +154,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unknown error occurred.'**
   String get error_unknown;
+
+  /// No description provided for @login_welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get login_welcome;
+
+  /// No description provided for @login_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your Supabase credentials to log in'**
+  String get login_subtitle;
+
+  /// No description provided for @login_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get login_email;
+
+  /// No description provided for @login_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get login_password;
+
+  /// No description provided for @login_submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure Login'**
+  String get login_submit;
+
+  /// No description provided for @login_error_email_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get login_error_email_empty;
+
+  /// No description provided for @login_error_email_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get login_error_email_invalid;
+
+  /// No description provided for @login_error_password_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get login_error_password_empty;
+
+  /// No description provided for @login_error_password_length.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get login_error_password_length;
+
+  /// No description provided for @login_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed: {reason}'**
+  String login_failed(String reason);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,5 +1,5 @@
-class GFTokens {
-  GFTokens._();
+class AppTokens {
+  AppTokens._();
 
   // --- 圆角令牌 (Radius Tokens) ---
   static const double radiusS = 12.0;

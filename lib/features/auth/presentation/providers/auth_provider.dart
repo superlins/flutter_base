@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 import '../../../../core/storage/storage_provider.dart';
 import '../../domain/models/auth_state.dart';
 
@@ -10,29 +11,44 @@ class Auth extends _$Auth {
 
   @override
   AuthState build() {
-    final storage = ref.watch(storageProvider);
-    final token = storage.getString(_tokenKey);
+    // 自动恢复 Supabase 保留在本地的 Session 会话
+    final session = sb.Supabase.instance.client.auth.currentSession;
     
-    if (token != null) {
-      return AuthState.authenticated(token: token);
+    if (session != null) {
+      return AuthState.authenticated(token: session.accessToken);
     }
     return const AuthState.unauthenticated();
   }
 
-  /// 模拟登录方法
-  Future<void> login(String username, String password) async {
+  /// 使用 Supabase 真实的邮箱和密码进行登录
+  Future<void> login(String email, String password) async {
     state = const AuthState.loading();
-    await Future.delayed(const Duration(seconds: 1)); // 模拟网络延迟
-    
-    const mockToken = 'mock_jwt_token_123456';
-    final storage = ref.read(storageProvider);
-    await storage.setString(_tokenKey, mockToken);
-    
-    state = const AuthState.authenticated(token: mockToken);
+    try {
+      final response = await sb.Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      
+      final token = response.session?.accessToken;
+      if (token != null) {
+        final storage = ref.read(storageProvider);
+        await storage.setString(_tokenKey, token);
+        state = AuthState.authenticated(token: token);
+      } else {
+        state = const AuthState.unauthenticated();
+      }
+    } catch (e) {
+      state = const AuthState.unauthenticated();
+      rethrow; // 抛出异常供 UI 拦截友好提示
+    }
   }
 
-  /// 登出方法
+  /// 调用 Supabase 登出并清除本地 Token 标识
   Future<void> logout() async {
+    try {
+      await sb.Supabase.instance.client.auth.signOut();
+    } catch (_) {}
+    
     final storage = ref.read(storageProvider);
     await storage.remove(_tokenKey);
     state = const AuthState.unauthenticated();

@@ -15,5 +15,22 @@
     }
   },
   "moderation_default_reason": "含有违规内容",
-  "error_unknown": "发生未知错误。"
+  "error_unknown": "发生未知错误。",
+  "login_welcome": "欢迎回来",
+  "login_subtitle": "请输入您的 Supabase 账号密码登录",
+  "login_email": "电子邮箱",
+  "login_password": "密码",
+  "login_submit": "安全登录",
+  "login_error_email_empty": "请输入邮箱",
+  "login_error_email_invalid": "请输入合法的邮箱",
+  "login_error_password_empty": "请输入密码",
+  "login_error_password_length": "密码长度不能少于 6 位",
+  "login_failed": "登录失败: {reason}",
+  "@login_failed": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  }
 }

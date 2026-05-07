@@ -5,29 +5,29 @@ import 'typography.dart';
 import 'app_colors_extension.dart';
 import 'design_tokens.dart';
 
-class GFAppTheme {
-  GFAppTheme._();
+class AppTheme {
+  AppTheme._();
 
   // 使用统一的设计令牌 (Design Tokens)
-  static const double _defaultRadius = GFTokens.radiusM;   // 16px
-  static const double _containerRadius = GFTokens.radiusL; // 24px
+  static const double _defaultRadius = AppTokens.radiusM;   // 16px
+  static const double _containerRadius = AppTokens.radiusL; // 24px
 
   static ThemeData get darkTheme {
     return FlexThemeData.dark(
       useMaterial3: true,
       // 直接映射设计系统中的全量色盘
       colors: const FlexSchemeColor(
-        primary: GFColors.primary,
-        primaryContainer: GFColors.primaryContainer,
-        secondary: GFColors.secondary,
-        secondaryContainer: GFColors.secondaryContainer,
-        tertiary: GFColors.tertiary,
-        tertiaryContainer: GFColors.tertiaryContainer,
-        error: GFColors.error,
-        errorContainer: GFColors.errorContainer,
+        primary: AppColors.darkPrimary,
+        primaryContainer: AppColors.darkPrimaryContainer,
+        secondary: AppColors.darkSecondary,
+        secondaryContainer: AppColors.darkSecondaryContainer,
+        tertiary: AppColors.darkTertiary,
+        tertiaryContainer: AppColors.darkTertiaryContainer,
+        error: AppColors.darkError,
+        errorContainer: AppColors.darkErrorContainer,
       ),
-      surface: GFColors.surface,
-      scaffoldBackground: GFColors.background,
+      surface: AppColors.darkSurface,
+      scaffoldBackground: AppColors.darkBackground,
       
       // 表面模式配置
       surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
@@ -47,7 +47,7 @@ class GFAppTheme {
         
         // 输入框样式优化
         inputDecoratorIsFilled: true,
-        inputDecoratorFillColor: GFColors.surfaceContainerLow,
+        inputDecoratorFillColor: AppColors.darkSurfaceVariant,
         inputDecoratorRadius: _defaultRadius,
         inputDecoratorBorderType: FlexInputBorderType.outline,
         inputDecoratorUnfocusedBorderIsColored: false,
@@ -60,19 +60,19 @@ class GFAppTheme {
         bottomNavigationBarOpacity: 0.9,
       ),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      fontFamily: GFTypography.fontFamily,
+      fontFamily: AppTypography.fontFamily,
     ).copyWith(
       splashFactory: NoSplash.splashFactory,
-      textTheme: GFTypography.textTheme.apply(
-        bodyColor: GFColors.onSurface,
-        displayColor: GFColors.onSurface,
+      textTheme: AppTypography.textTheme.apply(
+        bodyColor: AppColors.darkOnSurface,
+        displayColor: AppColors.darkOnSurface,
       ),
       extensions: [
         const AppColorsExtension(
-          success: GFColors.success,
-          warning: GFColors.warning,
-          info: GFColors.statusCyan,
-          extra: GFColors.secondary,
+          success: AppColors.success,
+          warning: AppColors.warning,
+          info: AppColors.info,
+          extra: AppColors.darkSecondary,
         ),
       ],
     );
@@ -82,17 +82,17 @@ class GFAppTheme {
     return FlexThemeData.light(
       useMaterial3: true,
       colors: const FlexSchemeColor(
-        primary: GFColors.lightPrimary,
-        primaryContainer: GFColors.lightPrimaryContainer,
-        secondary: GFColors.secondary,
-        secondaryContainer: Color(0xFFF0DBFF),
-        tertiary: Color(0xFF703700),
-        tertiaryContainer: Color(0xFFFFDCC5),
-        error: Color(0xFFBA1A1A),
-        errorContainer: Color(0xFFFFDAD6),
+        primary: AppColors.lightPrimary,
+        primaryContainer: AppColors.lightPrimaryContainer,
+        secondary: AppColors.lightSecondary,
+        secondaryContainer: AppColors.lightSecondaryContainer,
+        tertiary: AppColors.lightTertiary,
+        tertiaryContainer: AppColors.lightTertiaryContainer,
+        error: AppColors.lightError,
+        errorContainer: AppColors.lightErrorContainer,
       ),
-      surface: GFColors.lightSurface,
-      scaffoldBackground: GFColors.lightBackground,
+      surface: AppColors.lightSurface,
+      scaffoldBackground: AppColors.lightBackground,
       
       // 浅色模式保持清爽：极低水平的混色
       surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
@@ -106,7 +106,7 @@ class GFAppTheme {
         
         // 输入框样式：浅色模式下边框更明显
         inputDecoratorIsFilled: true,
-        inputDecoratorFillColor: Color(0xFFF3F4F6),
+        inputDecoratorFillColor: AppColors.lightSurfaceVariant,
         inputDecoratorRadius: _defaultRadius,
         inputDecoratorBorderType: FlexInputBorderType.outline,
         inputDecoratorUnfocusedBorderIsColored: false,
@@ -118,19 +118,19 @@ class GFAppTheme {
         elevatedButtonSecondarySchemeColor: SchemeColor.onPrimary,
       ),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      fontFamily: GFTypography.fontFamily,
+      fontFamily: AppTypography.fontFamily,
     ).copyWith(
       splashFactory: NoSplash.splashFactory,
-      textTheme: GFTypography.textTheme.apply(
-        bodyColor: GFColors.lightOnSurface,
-        displayColor: GFColors.lightOnSurface,
+      textTheme: AppTypography.textTheme.apply(
+        bodyColor: AppColors.lightOnSurface,
+        displayColor: AppColors.lightOnSurface,
       ),
       extensions: [
         AppColorsExtension(
-          success: GFColors.success,
-          warning: GFColors.warning,
-          info: GFColors.statusCyan,
-          extra: GFColors.secondary.withValues(alpha: 0.8),
+          success: AppColors.success,
+          warning: AppColors.warning,
+          info: AppColors.info,
+          extra: AppColors.lightSecondary.withValues(alpha: 0.8),
         ),
       ],
     );

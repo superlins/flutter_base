@@ -23,6 +23,12 @@ abstract class AppConfig {
   @EnviedField(varName: 'APP_NAME')
   static final String appName = _AppConfig.appName;
 
+  @EnviedField(varName: 'SUPABASE_URL')
+  static final String supabaseUrl = _AppConfig.supabaseUrl;
+
+  @EnviedField(varName: 'SUPABASE_ANON_KEY')
+  static final String supabaseAnonKey = _AppConfig.supabaseAnonKey;
+
   /// 获取当前环境类型
   static AppEnvironment get environment => _env == 'prod'
       ? AppEnvironment.prod

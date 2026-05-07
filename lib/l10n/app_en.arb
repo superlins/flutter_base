@@ -18,5 +18,22 @@
     }
   },
   "moderation_default_reason": "unacceptable content",
-  "error_unknown": "An unknown error occurred."
+  "error_unknown": "An unknown error occurred.",
+  "login_welcome": "Welcome Back",
+  "login_subtitle": "Please enter your Supabase credentials to log in",
+  "login_email": "Email Address",
+  "login_password": "Password",
+  "login_submit": "Secure Login",
+  "login_error_email_empty": "Please enter your email",
+  "login_error_email_invalid": "Please enter a valid email",
+  "login_error_password_empty": "Please enter your password",
+  "login_error_password_length": "Password must be at least 6 characters",
+  "login_failed": "Login failed: {reason}",
+  "@login_failed": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  }
 }
