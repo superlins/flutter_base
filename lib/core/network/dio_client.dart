@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../config/app_config.dart';
 import 'interceptors.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://api.example.com',
+      baseUrl: AppConfig.baseUrl,
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
       headers: {
@@ -20,7 +20,7 @@ final dioProvider = Provider<Dio>((ref) {
   dio.interceptors.add(loggingInterceptor());
 
   // 认证拦截器
-  dio.interceptors.add(authInterceptor());
+  dio.interceptors.add(authInterceptor(ref));
 
   // 重试拦截器
   dio.interceptors.add(retryInterceptor());

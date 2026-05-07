@@ -1,5 +1,19 @@
 {
   "appTitle": "现代应用",
   "welcomeMessage": "欢迎回来！",
-  "homeTitle": "极简现代设计"
+  "homeTitle": "极简现代设计",
+  "error_network": "网络连接错误，请稍后重试。",
+  "error_unauthorized": "登录失效，请重新登录。",
+  "error_bad_request": "请求无效。",
+  "error_server": "服务器错误，请稍后重试。",
+  "error_moderation": "内容涉嫌违规：{reason}",
+  "@error_moderation": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "moderation_default_reason": "含有违规内容",
+  "error_unknown": "发生未知错误。"
 }

@@ -4,5 +4,19 @@
     "description": "The title of the application"
   },
   "welcomeMessage": "Welcome Back!",
-  "homeTitle": "Minimalist Design"
+  "homeTitle": "Minimalist Design",
+  "error_network": "Network error, please check your connection.",
+  "error_unauthorized": "Session expired, please log in again.",
+  "error_bad_request": "Invalid request.",
+  "error_server": "Server error, please try again later.",
+  "error_moderation": "Content violation: {reason}",
+  "@error_moderation": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "moderation_default_reason": "unacceptable content",
+  "error_unknown": "An unknown error occurred."
 }

@@ -16,4 +16,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeTitle => 'Minimalist Design';
+
+  @override
+  String get error_network => 'Network error, please check your connection.';
+
+  @override
+  String get error_unauthorized => 'Session expired, please log in again.';
+
+  @override
+  String get error_bad_request => 'Invalid request.';
+
+  @override
+  String get error_server => 'Server error, please try again later.';
+
+  @override
+  String error_moderation(String reason) {
+    return 'Content violation: $reason';
+  }
+
+  @override
+  String get moderation_default_reason => 'unacceptable content';
+
+  @override
+  String get error_unknown => 'An unknown error occurred.';
 }

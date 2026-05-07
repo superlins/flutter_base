@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import '../storage/storage_provider.dart';
+import '../../features/auth/presentation/providers/auth_provider.dart';
 
 /// 日志拦截器（仅 debug 模式启用）
 Interceptor loggingInterceptor() => PrettyDioLogger(
@@ -14,19 +17,21 @@ Interceptor loggingInterceptor() => PrettyDioLogger(
       enabled: kDebugMode,
     );
 
-/// 认证拦截器：自动注入 Token
-Interceptor authInterceptor() => InterceptorsWrapper(
+/// 认证拦截器：自动注入 Token 并处理失效
+Interceptor authInterceptor(Ref ref) => InterceptorsWrapper(
       onRequest: (options, handler) {
-        // 从本地存储或状态管理中获取 Token
-        // final token = await getToken();
-        // if (token != null) {
-        //   options.headers['Authorization'] = 'Bearer $token';
-        // }
+        final storage = ref.read(storageProvider);
+        final token = storage.getString('auth_token');
+        if (token != null) {
+          options.headers['Authorization'] = 'Bearer $token';
+        }
         return handler.next(options);
       },
       onError: (DioException e, handler) {
         if (e.response?.statusCode == 401) {
-          debugPrint('Unauthorized: token may be expired');
+          debugPrint('Unauthorized 401: Token expired, triggering global logout...');
+          // 触发全局无感登出，Router 会立刻监听到变化并将用户踢回登录页
+          ref.read(authProvider.notifier).logout();
         }
         return handler.next(e);
       },
@@ -48,7 +53,7 @@ Interceptor retryInterceptor({int maxRetries = 2}) => InterceptorsWrapper(
           await Future.delayed(delay);
 
           try {
-            final response = await e.requestOptions.adapter(e.requestOptions);
+            final response = await Dio().fetch(e.requestOptions);
             return handler.resolve(response);
           } catch (_) {
             // 重试失败，继续抛出原始错误
