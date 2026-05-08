@@ -1,3 +1,4 @@
+import 'package:base/core/error/error_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,12 +30,12 @@ void main() async {
   // 1. 捕获 Flutter 渲染树中的未处理异常
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
-    debugPrint('🚨 [Flutter Frame Error] ${details.exception}\n${details.stack}');
+    AppErrorHandler.handle(details.exception, details.stack);
   };
 
   // 2. 捕获 Dart 异步并发/主线程中的未处理底层异常
   PlatformDispatcher.instance.onError = (error, stack) {
-    debugPrint('🚨 [Platform Uncaught Error] $error\n$stack');
+    AppErrorHandler.handle(error, stack);
     return true;
   };
 
@@ -50,6 +51,7 @@ void main() async {
 
   runApp(
     ProviderScope(
+      observers: [AppProviderObserver()],
       overrides: [storageProvider.overrideWithValue(StorageService(prefs))],
       child: const MyApp(),
     ),

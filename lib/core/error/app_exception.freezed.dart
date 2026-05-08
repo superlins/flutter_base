@@ -14,26 +14,57 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppException {
 
-
+ AppErrorSeverity get severity;
+/// Create a copy of AppException
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AppExceptionCopyWith<AppException> get copyWith => _$AppExceptionCopyWithImpl<AppException>(this as AppException, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppException);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppException&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,severity);
 
 
 
 }
 
 /// @nodoc
-class $AppExceptionCopyWith<$Res>  {
-$AppExceptionCopyWith(AppException _, $Res Function(AppException) __);
+abstract mixin class $AppExceptionCopyWith<$Res>  {
+  factory $AppExceptionCopyWith(AppException value, $Res Function(AppException) _then) = _$AppExceptionCopyWithImpl;
+@useResult
+$Res call({
+ AppErrorSeverity severity
+});
+
+
+
+
+}
+/// @nodoc
+class _$AppExceptionCopyWithImpl<$Res>
+    implements $AppExceptionCopyWith<$Res> {
+  _$AppExceptionCopyWithImpl(this._self, this._then);
+
+  final AppException _self;
+  final $Res Function(AppException) _then;
+
+/// Create a copy of AppException
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? severity = null,}) {
+  return _then(_self.copyWith(
+severity: null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
+  ));
+}
+
 }
 
 
@@ -130,15 +161,15 @@ return unknown(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String? message)?  network,TResult Function( String? message)?  unauthorized,TResult Function( String? message)?  badRequest,TResult Function( String? message)?  server,TResult Function( String reason,  List<String> riskWords)?  moderation,TResult Function( String? message)?  unknown,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String? message,  AppErrorSeverity severity)?  network,TResult Function( String? message,  AppErrorSeverity severity)?  unauthorized,TResult Function( String? message,  AppErrorSeverity severity)?  badRequest,TResult Function( String? message,  AppErrorSeverity severity)?  server,TResult Function( String reason,  List<String> riskWords,  AppErrorSeverity severity)?  moderation,TResult Function( String? message,  AppErrorSeverity severity)?  unknown,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NetworkException() when network != null:
-return network(_that.message);case _UnauthorizedException() when unauthorized != null:
-return unauthorized(_that.message);case _BadRequestException() when badRequest != null:
-return badRequest(_that.message);case _ServerException() when server != null:
-return server(_that.message);case _ModerationException() when moderation != null:
-return moderation(_that.reason,_that.riskWords);case _UnknownException() when unknown != null:
-return unknown(_that.message);case _:
+return network(_that.message,_that.severity);case _UnauthorizedException() when unauthorized != null:
+return unauthorized(_that.message,_that.severity);case _BadRequestException() when badRequest != null:
+return badRequest(_that.message,_that.severity);case _ServerException() when server != null:
+return server(_that.message,_that.severity);case _ModerationException() when moderation != null:
+return moderation(_that.reason,_that.riskWords,_that.severity);case _UnknownException() when unknown != null:
+return unknown(_that.message,_that.severity);case _:
   return orElse();
 
 }
@@ -156,15 +187,15 @@ return unknown(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String? message)  network,required TResult Function( String? message)  unauthorized,required TResult Function( String? message)  badRequest,required TResult Function( String? message)  server,required TResult Function( String reason,  List<String> riskWords)  moderation,required TResult Function( String? message)  unknown,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String? message,  AppErrorSeverity severity)  network,required TResult Function( String? message,  AppErrorSeverity severity)  unauthorized,required TResult Function( String? message,  AppErrorSeverity severity)  badRequest,required TResult Function( String? message,  AppErrorSeverity severity)  server,required TResult Function( String reason,  List<String> riskWords,  AppErrorSeverity severity)  moderation,required TResult Function( String? message,  AppErrorSeverity severity)  unknown,}) {final _that = this;
 switch (_that) {
 case _NetworkException():
-return network(_that.message);case _UnauthorizedException():
-return unauthorized(_that.message);case _BadRequestException():
-return badRequest(_that.message);case _ServerException():
-return server(_that.message);case _ModerationException():
-return moderation(_that.reason,_that.riskWords);case _UnknownException():
-return unknown(_that.message);case _:
+return network(_that.message,_that.severity);case _UnauthorizedException():
+return unauthorized(_that.message,_that.severity);case _BadRequestException():
+return badRequest(_that.message,_that.severity);case _ServerException():
+return server(_that.message,_that.severity);case _ModerationException():
+return moderation(_that.reason,_that.riskWords,_that.severity);case _UnknownException():
+return unknown(_that.message,_that.severity);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -181,15 +212,15 @@ return unknown(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String? message)?  network,TResult? Function( String? message)?  unauthorized,TResult? Function( String? message)?  badRequest,TResult? Function( String? message)?  server,TResult? Function( String reason,  List<String> riskWords)?  moderation,TResult? Function( String? message)?  unknown,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String? message,  AppErrorSeverity severity)?  network,TResult? Function( String? message,  AppErrorSeverity severity)?  unauthorized,TResult? Function( String? message,  AppErrorSeverity severity)?  badRequest,TResult? Function( String? message,  AppErrorSeverity severity)?  server,TResult? Function( String reason,  List<String> riskWords,  AppErrorSeverity severity)?  moderation,TResult? Function( String? message,  AppErrorSeverity severity)?  unknown,}) {final _that = this;
 switch (_that) {
 case _NetworkException() when network != null:
-return network(_that.message);case _UnauthorizedException() when unauthorized != null:
-return unauthorized(_that.message);case _BadRequestException() when badRequest != null:
-return badRequest(_that.message);case _ServerException() when server != null:
-return server(_that.message);case _ModerationException() when moderation != null:
-return moderation(_that.reason,_that.riskWords);case _UnknownException() when unknown != null:
-return unknown(_that.message);case _:
+return network(_that.message,_that.severity);case _UnauthorizedException() when unauthorized != null:
+return unauthorized(_that.message,_that.severity);case _BadRequestException() when badRequest != null:
+return badRequest(_that.message,_that.severity);case _ServerException() when server != null:
+return server(_that.message,_that.severity);case _ModerationException() when moderation != null:
+return moderation(_that.reason,_that.riskWords,_that.severity);case _UnknownException() when unknown != null:
+return unknown(_that.message,_that.severity);case _:
   return null;
 
 }
@@ -201,14 +232,15 @@ return unknown(_that.message);case _:
 
 
 class _NetworkException extends AppException {
-  const _NetworkException([this.message]): super._();
+  const _NetworkException([this.message, this.severity = AppErrorSeverity.toast]): super._();
   
 
  final  String? message;
+@override@JsonKey() final  AppErrorSeverity severity;
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$NetworkExceptionCopyWith<_NetworkException> get copyWith => __$NetworkExceptionCopyWithImpl<_NetworkException>(this, _$identity);
 
@@ -216,12 +248,12 @@ _$NetworkExceptionCopyWith<_NetworkException> get copyWith => __$NetworkExceptio
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NetworkException&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NetworkException&&(identical(other.message, message) || other.message == message)&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,severity);
 
 
 
@@ -230,9 +262,9 @@ int get hashCode => Object.hash(runtimeType,message);
 /// @nodoc
 abstract mixin class _$NetworkExceptionCopyWith<$Res> implements $AppExceptionCopyWith<$Res> {
   factory _$NetworkExceptionCopyWith(_NetworkException value, $Res Function(_NetworkException) _then) = __$NetworkExceptionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String? message
+ String? message, AppErrorSeverity severity
 });
 
 
@@ -249,10 +281,11 @@ class __$NetworkExceptionCopyWithImpl<$Res>
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? severity = null,}) {
   return _then(_NetworkException(
 freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
   ));
 }
 
@@ -263,14 +296,15 @@ as String?,
 
 
 class _UnauthorizedException extends AppException {
-  const _UnauthorizedException([this.message]): super._();
+  const _UnauthorizedException([this.message, this.severity = AppErrorSeverity.fullscreen]): super._();
   
 
  final  String? message;
+@override@JsonKey() final  AppErrorSeverity severity;
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$UnauthorizedExceptionCopyWith<_UnauthorizedException> get copyWith => __$UnauthorizedExceptionCopyWithImpl<_UnauthorizedException>(this, _$identity);
 
@@ -278,12 +312,12 @@ _$UnauthorizedExceptionCopyWith<_UnauthorizedException> get copyWith => __$Unaut
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnauthorizedException&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnauthorizedException&&(identical(other.message, message) || other.message == message)&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,severity);
 
 
 
@@ -292,9 +326,9 @@ int get hashCode => Object.hash(runtimeType,message);
 /// @nodoc
 abstract mixin class _$UnauthorizedExceptionCopyWith<$Res> implements $AppExceptionCopyWith<$Res> {
   factory _$UnauthorizedExceptionCopyWith(_UnauthorizedException value, $Res Function(_UnauthorizedException) _then) = __$UnauthorizedExceptionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String? message
+ String? message, AppErrorSeverity severity
 });
 
 
@@ -311,10 +345,11 @@ class __$UnauthorizedExceptionCopyWithImpl<$Res>
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? severity = null,}) {
   return _then(_UnauthorizedException(
 freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
   ));
 }
 
@@ -325,14 +360,15 @@ as String?,
 
 
 class _BadRequestException extends AppException {
-  const _BadRequestException([this.message]): super._();
+  const _BadRequestException([this.message, this.severity = AppErrorSeverity.toast]): super._();
   
 
  final  String? message;
+@override@JsonKey() final  AppErrorSeverity severity;
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$BadRequestExceptionCopyWith<_BadRequestException> get copyWith => __$BadRequestExceptionCopyWithImpl<_BadRequestException>(this, _$identity);
 
@@ -340,12 +376,12 @@ _$BadRequestExceptionCopyWith<_BadRequestException> get copyWith => __$BadReques
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BadRequestException&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BadRequestException&&(identical(other.message, message) || other.message == message)&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,severity);
 
 
 
@@ -354,9 +390,9 @@ int get hashCode => Object.hash(runtimeType,message);
 /// @nodoc
 abstract mixin class _$BadRequestExceptionCopyWith<$Res> implements $AppExceptionCopyWith<$Res> {
   factory _$BadRequestExceptionCopyWith(_BadRequestException value, $Res Function(_BadRequestException) _then) = __$BadRequestExceptionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String? message
+ String? message, AppErrorSeverity severity
 });
 
 
@@ -373,10 +409,11 @@ class __$BadRequestExceptionCopyWithImpl<$Res>
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? severity = null,}) {
   return _then(_BadRequestException(
 freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
   ));
 }
 
@@ -387,14 +424,15 @@ as String?,
 
 
 class _ServerException extends AppException {
-  const _ServerException([this.message]): super._();
+  const _ServerException([this.message, this.severity = AppErrorSeverity.toast]): super._();
   
 
  final  String? message;
+@override@JsonKey() final  AppErrorSeverity severity;
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$ServerExceptionCopyWith<_ServerException> get copyWith => __$ServerExceptionCopyWithImpl<_ServerException>(this, _$identity);
 
@@ -402,12 +440,12 @@ _$ServerExceptionCopyWith<_ServerException> get copyWith => __$ServerExceptionCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServerException&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServerException&&(identical(other.message, message) || other.message == message)&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,severity);
 
 
 
@@ -416,9 +454,9 @@ int get hashCode => Object.hash(runtimeType,message);
 /// @nodoc
 abstract mixin class _$ServerExceptionCopyWith<$Res> implements $AppExceptionCopyWith<$Res> {
   factory _$ServerExceptionCopyWith(_ServerException value, $Res Function(_ServerException) _then) = __$ServerExceptionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String? message
+ String? message, AppErrorSeverity severity
 });
 
 
@@ -435,10 +473,11 @@ class __$ServerExceptionCopyWithImpl<$Res>
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? severity = null,}) {
   return _then(_ServerException(
 freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
   ));
 }
 
@@ -449,7 +488,7 @@ as String?,
 
 
 class _ModerationException extends AppException {
-  const _ModerationException(this.reason, final  List<String> riskWords): _riskWords = riskWords,super._();
+  const _ModerationException(this.reason, final  List<String> riskWords, [this.severity = AppErrorSeverity.toast]): _riskWords = riskWords,super._();
   
 
  final  String reason;
@@ -460,10 +499,11 @@ class _ModerationException extends AppException {
   return EqualUnmodifiableListView(_riskWords);
 }
 
+@override@JsonKey() final  AppErrorSeverity severity;
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$ModerationExceptionCopyWith<_ModerationException> get copyWith => __$ModerationExceptionCopyWithImpl<_ModerationException>(this, _$identity);
 
@@ -471,12 +511,12 @@ _$ModerationExceptionCopyWith<_ModerationException> get copyWith => __$Moderatio
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModerationException&&(identical(other.reason, reason) || other.reason == reason)&&const DeepCollectionEquality().equals(other._riskWords, _riskWords));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModerationException&&(identical(other.reason, reason) || other.reason == reason)&&const DeepCollectionEquality().equals(other._riskWords, _riskWords)&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,reason,const DeepCollectionEquality().hash(_riskWords));
+int get hashCode => Object.hash(runtimeType,reason,const DeepCollectionEquality().hash(_riskWords),severity);
 
 
 
@@ -485,9 +525,9 @@ int get hashCode => Object.hash(runtimeType,reason,const DeepCollectionEquality(
 /// @nodoc
 abstract mixin class _$ModerationExceptionCopyWith<$Res> implements $AppExceptionCopyWith<$Res> {
   factory _$ModerationExceptionCopyWith(_ModerationException value, $Res Function(_ModerationException) _then) = __$ModerationExceptionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String reason, List<String> riskWords
+ String reason, List<String> riskWords, AppErrorSeverity severity
 });
 
 
@@ -504,11 +544,12 @@ class __$ModerationExceptionCopyWithImpl<$Res>
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? reason = null,Object? riskWords = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? reason = null,Object? riskWords = null,Object? severity = null,}) {
   return _then(_ModerationException(
 null == reason ? _self.reason : reason // ignore: cast_nullable_to_non_nullable
 as String,null == riskWords ? _self._riskWords : riskWords // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
   ));
 }
 
@@ -519,14 +560,15 @@ as List<String>,
 
 
 class _UnknownException extends AppException {
-  const _UnknownException([this.message]): super._();
+  const _UnknownException([this.message, this.severity = AppErrorSeverity.toast]): super._();
   
 
  final  String? message;
+@override@JsonKey() final  AppErrorSeverity severity;
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$UnknownExceptionCopyWith<_UnknownException> get copyWith => __$UnknownExceptionCopyWithImpl<_UnknownException>(this, _$identity);
 
@@ -534,12 +576,12 @@ _$UnknownExceptionCopyWith<_UnknownException> get copyWith => __$UnknownExceptio
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnknownException&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnknownException&&(identical(other.message, message) || other.message == message)&&(identical(other.severity, severity) || other.severity == severity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,severity);
 
 
 
@@ -548,9 +590,9 @@ int get hashCode => Object.hash(runtimeType,message);
 /// @nodoc
 abstract mixin class _$UnknownExceptionCopyWith<$Res> implements $AppExceptionCopyWith<$Res> {
   factory _$UnknownExceptionCopyWith(_UnknownException value, $Res Function(_UnknownException) _then) = __$UnknownExceptionCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String? message
+ String? message, AppErrorSeverity severity
 });
 
 
@@ -567,10 +609,11 @@ class __$UnknownExceptionCopyWithImpl<$Res>
 
 /// Create a copy of AppException
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? severity = null,}) {
   return _then(_UnknownException(
 freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,null == severity ? _self.severity : severity // ignore: cast_nullable_to_non_nullable
+as AppErrorSeverity,
   ));
 }
 

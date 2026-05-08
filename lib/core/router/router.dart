@@ -24,7 +24,7 @@ Listenable routerListenable(Ref ref) {
   return _RouterRefreshNotifier(ref);
 }
 
-final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'root',
 );
 
@@ -33,7 +33,7 @@ GoRouter router(Ref ref) {
   final listenable = ref.watch(routerListenableProvider);
 
   return GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     initialLocation: RoutePaths.home,
     refreshListenable: listenable,
     debugLogDiagnostics: true,
