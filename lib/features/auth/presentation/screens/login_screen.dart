@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../l10n/app_localizations.dart';
+import 'package:base/l10n/app_localizations.dart';
 import '../../domain/models/auth_state.dart';
 import '../providers/auth_provider.dart';
 

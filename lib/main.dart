@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'l10n/app_localizations.dart';
+import 'package:base/l10n/app_localizations.dart';
 import 'core/storage/storage_provider.dart';
 import 'core/system/theme/app_theme.dart';
 import 'core/system/theme/theme_provider.dart';

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../l10n/app_localizations.dart';
+import 'package:base/l10n/app_localizations.dart';
 
 part 'app_exception.freezed.dart';
 
