@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:base/l10n/app_localizations.dart';
 import '../../error/app_exception.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
@@ -20,6 +21,8 @@ class AsyncValueWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return value.when(
       data: data,
       error: (err, stack) {
@@ -27,33 +30,38 @@ class AsyncValueWidget<T> extends StatelessWidget {
           return errorWidget!(err, stack);
         }
 
-        final errorMsg = err is AppException 
-            ? err.toString() // 如果有更具体的文字格式可以在此做 localizedMessage 调用
-            : err.toString();
+        final String errorMsg;
+        if (err is AppException && l10n != null) {
+          errorMsg = err.localizedMessage(l10n);
+        } else {
+          errorMsg = err.toString();
+        }
 
         return Center(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.error_outline_rounded,
                   size: 64,
-                  color: Colors.redAccent,
+                  color: Theme.of(context).colorScheme.error,
                 ),
                 const SizedBox(height: 16),
                 Text(
                   errorMsg,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 if (onRetry != null) ...[
                   const SizedBox(height: 24),
                   ElevatedButton.icon(
                     onPressed: onRetry,
                     icon: const Icon(Icons.refresh_rounded),
-                    label: const Text('重试'),
+                    label: Text(l10n?.retry ?? ''),
                   ),
                 ],
               ],

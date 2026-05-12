@@ -31,9 +31,12 @@ class AppErrorHandler {
 
       switch (severity) {
         case AppErrorSeverity.fullscreen:
-          // TODO: 预留全屏阻断或路由强转逻辑
-          // GoRouter.of(context).go(RoutePaths.errorPage, extra: message);
-          break;
+          // TODO: 真正实现全屏错误页后，这里应跳转路由。目前降级为 toast 提示，确保不静默失败。
+          debugPrint(
+            '⚠️ [Fullscreen Error] Redirect not implemented, falling back to toast.',
+          );
+          continue toastLabel;
+        toastLabel:
         case AppErrorSeverity.toast:
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
@@ -66,9 +69,14 @@ base class AppProviderObserver extends ProviderObserver {
     Object? previousValue,
     Object? newValue,
   ) {
+    final providerName = context.provider.name ?? context.provider.runtimeType;
+
     if (newValue is AsyncValue && newValue.hasError) {
-      final error = newValue.error ?? 'Unknown error';
-      AppErrorHandler.handle(error, newValue.stackTrace);
+      debugPrint(
+        '📝 [Provider Update Error] $providerName: ${newValue.error}',
+      );
+    } else {
+      debugPrint('🔄 [Provider Updated] $providerName');
     }
   }
 }

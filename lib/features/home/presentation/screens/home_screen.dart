@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:base/l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,10 +7,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('极简现代设计'),
+        title: Text(l10n.homeTitle),
         centerTitle: true,
         actions: [
           IconButton(
@@ -24,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '欢迎使用',
+              l10n.home_welcome,
               style: theme.textTheme.displaySmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.primary,
@@ -32,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '这是一套在 iOS 和 Android 上都保持高度一致、简洁且现代的 UI 模板。',
+              l10n.home_description,
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
@@ -51,11 +53,11 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const ListTile(
+                  ListTile(
                     contentPadding: EdgeInsets.zero,
-                    leading: CircleAvatar(child: Icon(Icons.auto_awesome)),
-                    title: Text('Material 3 核心驱动'),
-                    subtitle: Text('完美平衡两端审美'),
+                    leading: const CircleAvatar(child: Icon(Icons.auto_awesome)),
+                    title: Text(l10n.home_card_title),
+                    subtitle: Text(l10n.home_card_subtitle),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
@@ -63,20 +65,20 @@ class HomeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 52),
                     ),
-                    child: const Text('开始探索'),
+                    child: Text(l10n.home_explore),
                   ),
                 ],
               ),
             ),
             
             const SizedBox(height: 40),
-            const Text('常用组件示例', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(l10n.home_components_title, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('通知推送'),
+                Text(l10n.home_notifications),
                 Switch.adaptive(value: true, onChanged: (v) {}),
               ],
             ),

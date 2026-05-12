@@ -32,5 +32,13 @@
         "type": "String"
       }
     }
-  }
+  },
+  "retry": "重试",
+  "home_welcome": "欢迎使用",
+  "home_description": "这是一套在 iOS 和 Android 上都保持高度一致、简洁且现代的 UI 模板。",
+  "home_card_title": "Material 3 核心驱动",
+  "home_card_subtitle": "完美平衡两端审美",
+  "home_explore": "开始探索",
+  "home_components_title": "常用组件示例",
+  "home_notifications": "通知推送"
 }

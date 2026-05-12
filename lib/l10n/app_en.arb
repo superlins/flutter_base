@@ -35,5 +35,13 @@
         "type": "String"
       }
     }
-  }
+  },
+  "retry": "Retry",
+  "home_welcome": "Welcome",
+  "home_description": "A consistent, clean, and modern UI template for both iOS and Android.",
+  "home_card_title": "Material 3 Powered",
+  "home_card_subtitle": "Perfectly balanced aesthetics",
+  "home_explore": "Start Exploring",
+  "home_components_title": "Common Components",
+  "home_notifications": "Push Notifications"
 }

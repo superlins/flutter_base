@@ -39,7 +39,15 @@ void main() async {
     return true;
   };
 
-  // 3. 并行执行持久化存储与 Supabase 初始化，最大化缩减开屏耗时（Fail-Fast：任何一个失败则直接报错闪退）
+  // 3. 拦截组件渲染异常（Release 模式下隐藏灰色方块，Debug 模式保留红屏）
+  ErrorWidget.builder = (details) {
+    if (kReleaseMode) {
+      return const SizedBox.shrink();
+    }
+    return ErrorWidget(details.exception);
+  };
+
+  // 4. 并行执行持久化存储与 Supabase 初始化，最大化缩减开屏耗时（Fail-Fast：任何一个失败则直接报错闪退）
   final results = await Future.wait([
     SharedPreferences.getInstance(),
     Supabase.initialize(
