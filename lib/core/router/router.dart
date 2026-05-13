@@ -5,13 +5,9 @@ import '../../features/auth/domain/models/auth_state.dart';
 import '../../features/auth/presentation/providers/auth_provider.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/main_screen.dart';
 
 part 'router.g.dart';
-
-class RoutePaths {
-  static const String home = '/';
-  static const String login = '/login';
-}
 
 class _RouterRefreshNotifier extends ChangeNotifier {
   _RouterRefreshNotifier(Ref ref) {
@@ -24,6 +20,9 @@ Listenable routerListenable(Ref ref) {
   return _RouterRefreshNotifier(ref);
 }
 
+// 🔐 白名单模式：只有在白名单中的路径，才允许匿名访问
+const publicRoutes = ['/', '/login'];
+
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'root',
 );
@@ -34,7 +33,7 @@ GoRouter router(Ref ref) {
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: RoutePaths.home,
+    initialLocation: '/',
     refreshListenable: listenable,
     debugLogDiagnostics: true,
     redirect: (context, state) {
@@ -44,25 +43,56 @@ GoRouter router(Ref ref) {
         orElse: () => false,
       );
 
-      final isLoggingIn = state.matchedLocation == RoutePaths.login;
+      final isPublic = publicRoutes.contains(state.matchedLocation);
 
-      if (!loggedIn && !isLoggingIn) {
-        return RoutePaths.login;
+      // 1. 非公开页面且未登录 -> 强制跳登录
+      if (!isPublic && !loggedIn) {
+        return '/login';
       }
 
+      final isLoggingIn = state.matchedLocation == '/login';
+
+      // 2. 已登录且还在登录页 -> 跳回主页
       if (loggedIn && isLoggingIn) {
-        return RoutePaths.home;
+        return '/';
       }
 
       return null;
     },
     routes: [
-      GoRoute(
-        path: RoutePaths.home,
-        builder: (context, state) => const HomeScreen(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainScreen(navigationShell: navigationShell);
+        },
+        branches: MainTab.values.map((tab) {
+          return StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: tab.path,
+                builder: (context, state) {
+                  switch (tab) {
+                    case MainTab.home:
+                      return const HomeScreen();
+                    case MainTab.profile:
+                      // 基础脚手架采用通用的内联占位符展示，保持代码库极致纯净
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: const Text('Profile'),
+                          centerTitle: true,
+                        ),
+                        body: const Center(
+                          child: Text('Profile Tab (Placeholder)'),
+                        ),
+                      );
+                  }
+                },
+              ),
+            ],
+          );
+        }).toList(),
       ),
       GoRoute(
-        path: RoutePaths.login,
+        path: '/login',
         builder: (context, state) => const LoginScreen(),
       ),
     ],
