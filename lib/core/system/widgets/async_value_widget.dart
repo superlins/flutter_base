@@ -1,3 +1,4 @@
+import 'package:base/core/error/error_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:base/l10n/app_localizations.dart';
@@ -30,12 +31,9 @@ class AsyncValueWidget<T> extends StatelessWidget {
           return errorWidget!(err, stack);
         }
 
-        final String errorMsg;
-        if (err is AppException && l10n != null) {
-          errorMsg = err.localizedMessage(l10n);
-        } else {
-          errorMsg = err.toString();
-        }
+        // 🛡️ 调用全局统一解析器，完美映射自定义异常与多语言文案，告别零散判定！
+        final errorUi = AppErrorHandler.resolve(err, context);
+        final String errorMsg = errorUi.message;
 
         return Center(
           child: SingleChildScrollView(
@@ -53,8 +51,8 @@ class AsyncValueWidget<T> extends StatelessWidget {
                   errorMsg,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 if (onRetry != null) ...[
                   const SizedBox(height: 24),
@@ -69,10 +67,9 @@ class AsyncValueWidget<T> extends StatelessWidget {
           ),
         );
       },
-      loading: loadingWidget ??
-          () => const Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
+      loading:
+          loadingWidget ??
+          () => const Center(child: CircularProgressIndicator.adaptive()),
     );
   }
 }
